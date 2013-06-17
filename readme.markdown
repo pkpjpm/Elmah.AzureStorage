@@ -6,4 +6,11 @@ This project was inspired by [Wade Wegner's original Elmah Table Storgate implem
 + All table writes are made in one default partition - this makes storage management more difficult.
 + The original implementation make no effort to count exceptions, which disables the paging feature of Elmah.
 + This new library will use the latest Azure storage client (starting with 2.0, and updating as we go)
-Last but not least, I know that other devs have been looking for an Azure storage/Elmah solution. By establishing this repo, I hope to provide a convenient place for contributors to add features. 
+
+Last but not least, I know that other devs have been looking for an Azure storage/Elmah solution. By establishing this repo, I hope to provide a convenient place for contributors to add features.
+
+Dependencies
+-----------------
+1. Elmah, of course!
+2. Windows Azure Tools 2.0
+3. xunit
