@@ -20,7 +20,7 @@ namespace Elmah.AzureStorage.Tests
 
     public class KeyManager
     {
-        private const string PARTITION_FORMAT = "yyyyMM";
+        private const string PARTITION_FORMAT = "yyyyMMdd";
 
         internal void SetKey(ExceptionRecord record, DateTime refDate)
         {
@@ -31,29 +31,30 @@ namespace Elmah.AzureStorage.Tests
         {
             DateTime refDate = ParsePartitionDate(thisPartition);
 
-            return refDate.AddMonths(1).ToString(PARTITION_FORMAT);
+            return refDate.AddDays(1).ToString(PARTITION_FORMAT);
         }
 
         private static DateTime ParsePartitionDate(string thisPartition)
         {
             string yearString = thisPartition.Substring(0, 4);
             string monthString = thisPartition.Substring(4, 2);
+            string dayString = thisPartition.Substring(6, 2);
 
-            return new DateTime(int.Parse(yearString), int.Parse(monthString), 1);
+            return new DateTime(int.Parse(yearString), int.Parse(monthString), int.Parse(dayString));
         }
 
         internal string PrevPartition(string thisPartition)
         {
             var refDate = ParsePartitionDate(thisPartition);
 
-            return refDate.AddMonths(-1).ToString(PARTITION_FORMAT);
+            return refDate.AddDays(-1).ToString(PARTITION_FORMAT);
         }
     }
 
     public class KeyTests
     {
         [Fact]
-        public void PartitionIsBasedOnTheCurrentMonth()
+        public void PartitionIsBasedOnTheCurrentDay()
         {
             var record = new ExceptionRecord
             {
@@ -66,31 +67,43 @@ namespace Elmah.AzureStorage.Tests
 
             mgr.SetKey(record, refDate);
 
-            Assert.Equal("177607", record.PartitionKey);
+            Assert.Equal("17760704", record.PartitionKey);
         }
 
         [Fact]
-        public void NextPartitionIsNextMonth()
+        public void NextPartitionIsNextDay()
         {
-            string thisPartition = "200812";
+            string thisPartition = "20081231";
 
             var mgr = new KeyManager();
 
             string nextPartition = mgr.NextPartition(thisPartition);
 
-            Assert.Equal("200901", nextPartition);
+            Assert.Equal("20090101", nextPartition);
         }
 
         [Fact]
-        public void PrevPartitionIsLastMonth()
+        public void PrevPartitionIsDayBefore()
         {
-            string thisPartition = "201201";
+            string thisPartition = "20120101";
 
             var mgr = new KeyManager();
 
             string prevPartition = mgr.PrevPartition(thisPartition);
 
-            Assert.Equal("201112", prevPartition);
+            Assert.Equal("20111231", prevPartition);
+        }
+
+        [Fact]
+        public void NextPartitionMidMonthIsNextDay()
+        {
+            string thisPartition = "20130315";
+
+            var mgr = new KeyManager();
+
+            string nextPartition = mgr.NextPartition(thisPartition);
+
+            Assert.Equal("20130316", nextPartition);
         }
 
     }
