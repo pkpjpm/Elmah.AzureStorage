@@ -10,5 +10,9 @@ namespace Elmah.AzureStorage
     public class ExceptionRecord : TableEntity
     {
         public int StorageMethod { get; set; }
+
+        public string SerializedError { get; set; }
+
+        public string BlobUrl { get; set; }
     }
 }

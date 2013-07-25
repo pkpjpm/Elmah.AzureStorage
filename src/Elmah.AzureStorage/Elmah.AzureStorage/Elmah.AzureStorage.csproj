@@ -67,6 +67,8 @@
     <Compile Include="ExceptionRecord.cs" />
     <Compile Include="KeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StorageManager.cs" />
+    <Compile Include="TableErrorLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
