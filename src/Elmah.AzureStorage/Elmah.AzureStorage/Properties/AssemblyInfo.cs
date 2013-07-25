@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Elmah.AzureStorage.Tests")]
-[assembly: AssemblyDescription("Unit Tests for the Elmah.AzureStorage project")]
+[assembly: AssemblyTitle("Elmah.AzureStorage")]
+[assembly: AssemblyDescription("Elmah Extension for Windows Azure Storage")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Paul Keister")]
 [assembly: AssemblyProduct("Elmah.AzureStorage")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cba321b4-4ab4-4024-8093-d308a88b7cee")]
+[assembly: Guid("d15508b3-7f0b-44de-88fa-93a26e0311f7")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,3 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

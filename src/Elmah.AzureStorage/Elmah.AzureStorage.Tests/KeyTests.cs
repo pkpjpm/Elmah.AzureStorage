@@ -7,50 +7,6 @@ using Xunit;
 
 namespace Elmah.AzureStorage.Tests
 {
-    public static class Constants
-    {
-        public const int USE_TABLE_STORAGE = 1;
-        public const int USE_BLOB_STORAGE = 2;
-    }
-
-    public class ExceptionRecord : TableEntity
-    {
-        public int StorageMethod { get; set; }
-    }
-
-    public class KeyManager
-    {
-        private const string PARTITION_FORMAT = "yyyyMMdd";
-
-        internal void SetKey(ExceptionRecord record, DateTime refDate)
-        {
-            record.PartitionKey = refDate.ToString(PARTITION_FORMAT);
-        }
-
-        internal string NextPartition(string thisPartition)
-        {
-            DateTime refDate = ParsePartitionDate(thisPartition);
-
-            return refDate.AddDays(1).ToString(PARTITION_FORMAT);
-        }
-
-        private static DateTime ParsePartitionDate(string thisPartition)
-        {
-            string yearString = thisPartition.Substring(0, 4);
-            string monthString = thisPartition.Substring(4, 2);
-            string dayString = thisPartition.Substring(6, 2);
-
-            return new DateTime(int.Parse(yearString), int.Parse(monthString), int.Parse(dayString));
-        }
-
-        internal string PrevPartition(string thisPartition)
-        {
-            var refDate = ParsePartitionDate(thisPartition);
-
-            return refDate.AddDays(-1).ToString(PARTITION_FORMAT);
-        }
-    }
-
     public class KeyTests
     {
         [Fact]
