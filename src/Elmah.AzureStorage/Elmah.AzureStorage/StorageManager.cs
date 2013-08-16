@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elmah.AzureStorage.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,11 @@ namespace Elmah.AzureStorage
 {
     public class StorageManager
     {
-        public StorageManager(string connectionString)
-        {
+        private ITableClient _tables;
 
+        public StorageManager(ITableClient tables, IBlobClient blobs)
+        {
+            _tables = tables;
         }
 
         public int ErrorCount
@@ -19,7 +22,9 @@ namespace Elmah.AzureStorage
 
         public string StoreError(ExceptionRecord error)
         {
-            throw new NotImplementedException();
+            _tables.Save(error);
+
+            return KeyManager.EncodeKeys(error);
         }
 
         public ExceptionRecord RetrieveError(string id)

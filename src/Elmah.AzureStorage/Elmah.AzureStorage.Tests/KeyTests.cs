@@ -19,9 +19,7 @@ namespace Elmah.AzureStorage.Tests
 
             var refDate = DateTime.Parse("7/4/1776");
 
-            var mgr = new KeyManager();
-
-            mgr.SetKey(record, refDate);
+            KeyManager.SetKey(record, refDate);
 
             Assert.Equal("17760704", record.PartitionKey);
         }
@@ -31,9 +29,7 @@ namespace Elmah.AzureStorage.Tests
         {
             string thisPartition = "20081231";
 
-            var mgr = new KeyManager();
-
-            string nextPartition = mgr.NextPartition(thisPartition);
+            string nextPartition = KeyManager.NextPartition(thisPartition);
 
             Assert.Equal("20090101", nextPartition);
         }
@@ -43,9 +39,7 @@ namespace Elmah.AzureStorage.Tests
         {
             string thisPartition = "20120101";
 
-            var mgr = new KeyManager();
-
-            string prevPartition = mgr.PrevPartition(thisPartition);
+            string prevPartition = KeyManager.PrevPartition(thisPartition);
 
             Assert.Equal("20111231", prevPartition);
         }
@@ -55,9 +49,7 @@ namespace Elmah.AzureStorage.Tests
         {
             string thisPartition = "20130315";
 
-            var mgr = new KeyManager();
-
-            string nextPartition = mgr.NextPartition(thisPartition);
+            string nextPartition = KeyManager.NextPartition(thisPartition);
 
             Assert.Equal("20130316", nextPartition);
         }

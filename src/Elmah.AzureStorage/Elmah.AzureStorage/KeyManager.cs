@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Elmah.AzureStorage
 {
-    public class KeyManager
+    public static class KeyManager
     {
         private const string PARTITION_FORMAT = "yyyyMMdd";
 
-        public void SetKey(ExceptionRecord record, DateTime refDate)
+        public static void SetKey(ExceptionRecord record, DateTime refDate)
         {
             record.PartitionKey = refDate.ToString(PARTITION_FORMAT);
         }
 
-        public string NextPartition(string thisPartition)
+        public static string NextPartition(string thisPartition)
         {
             DateTime refDate = ParsePartitionDate(thisPartition);
 
@@ -31,11 +31,16 @@ namespace Elmah.AzureStorage
             return new DateTime(int.Parse(yearString), int.Parse(monthString), int.Parse(dayString));
         }
 
-        public string PrevPartition(string thisPartition)
+        public static string PrevPartition(string thisPartition)
         {
             var refDate = ParsePartitionDate(thisPartition);
 
             return refDate.AddDays(-1).ToString(PARTITION_FORMAT);
+        }
+
+        public static string EncodeKeys(ExceptionRecord record)
+        {
+            return string.Empty;
         }
     }
 }

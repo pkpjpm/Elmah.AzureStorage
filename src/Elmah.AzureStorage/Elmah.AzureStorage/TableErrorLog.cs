@@ -15,12 +15,12 @@ namespace Elmah.AzureStorage
             string connectionString = (string)config["connectionString"];
             //?? RoleEnvironment.GetConfigurationSettingValue((string)config["connectionStringName"]);
 
-            _storage = new StorageManager(connectionString);
+            //_storage = new StorageManager(connectionString);
         }
 
         public TableErrorLog(string connectionString)
         {
-            _storage = new StorageManager(connectionString);
+            //_storage = new StorageManager(connectionString);
         }
 
         public override ErrorLogEntry GetError(string id)
